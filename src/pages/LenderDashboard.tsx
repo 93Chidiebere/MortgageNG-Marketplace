@@ -15,7 +15,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { useAuth } from '@/contexts/AuthContext';
-import { mockLeads, mockProducts, mockLenders } from '@/data/mockData';
+import { mockProducts, mockLenders } from '@/data/mockData';
+import { useLenderLeads, useUpdateLeadStatus } from '@/hooks/useApi';
 import { Lead, MortgageProduct } from '@/types/mortgage';
 import { ProductManagement } from '@/components/ProductManagement';
 
@@ -35,13 +36,25 @@ export default function LenderDashboard() {
   const [lenderProducts, setLenderProducts] = useState<MortgageProduct[]>(
     mockProducts.filter(p => p.lenderId === lender?.id)
   );
-  const lenderLeads = mockLeads.filter(l => l.lenderId === lender?.id);
+  
+  const { data: leadsData } = useLenderLeads();
+  const updateStatus = useUpdateLeadStatus();
+  
+  const lenderLeads: Lead[] = leadsData || [];
+
+  const handleUpdateStatus = (id: string, newStatus: string) => {
+    updateStatus.mutate({ id, status: newStatus }, {
+      onSuccess: () => {
+        if (selectedLead) setSelectedLead({ ...selectedLead, status: newStatus as any });
+      }
+    });
+  };
 
   const filteredLeads = useMemo(() => {
     return lenderLeads.filter(lead => {
       if (statusFilter !== 'all' && lead.status !== statusFilter) return false;
-      if (searchTerm && !lead.userName.toLowerCase().includes(searchTerm.toLowerCase()) &&
-          !lead.userEmail.toLowerCase().includes(searchTerm.toLowerCase())) return false;
+      if (searchTerm && !lead.userName?.toLowerCase().includes(searchTerm.toLowerCase()) &&
+          !lead.userEmail?.toLowerCase().includes(searchTerm.toLowerCase())) return false;
       return true;
     });
   }, [lenderLeads, statusFilter, searchTerm]);
@@ -277,12 +290,21 @@ export default function LenderDashboard() {
                                       </div>
                                     </div>
                                     <div className="flex gap-2">
-                                      <Button className="flex-1" disabled={selectedLead.status !== 'new'}>
-                                        <CheckCircle2 className="h-4 w-4 mr-2" /> Accept Lead
-                                      </Button>
-                                      <Button variant="outline" className="flex-1" disabled={selectedLead.status !== 'new'}>
-                                        <XCircle className="h-4 w-4 mr-2" /> Reject
-                                      </Button>
+                                      {selectedLead.status === 'new' && (
+                                        <>
+                                          <Button className="flex-1" onClick={() => handleUpdateStatus(selectedLead.id, 'accepted')} disabled={updateStatus.isPending}>
+                                            <CheckCircle2 className="h-4 w-4 mr-2" /> Accept Lead
+                                          </Button>
+                                          <Button variant="outline" className="flex-1" onClick={() => handleUpdateStatus(selectedLead.id, 'rejected')} disabled={updateStatus.isPending}>
+                                            <XCircle className="h-4 w-4 mr-2" /> Reject
+                                          </Button>
+                                        </>
+                                      )}
+                                      {(selectedLead.status === 'accepted' || selectedLead.status === 'approved') && (
+                                        <Button className="flex-1 bg-green-600 hover:bg-green-700" onClick={() => handleUpdateStatus(selectedLead.id, 'disbursed')} disabled={updateStatus.isPending}>
+                                          <DollarSign className="h-4 w-4 mr-2" /> Mark as Disbursed
+                                        </Button>
+                                      )}
                                       <Button variant="secondary">
                                         <Download className="h-4 w-4 mr-2" /> Download Docs
                                       </Button>

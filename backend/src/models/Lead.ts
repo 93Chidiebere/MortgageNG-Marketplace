@@ -9,7 +9,7 @@ export interface ILead extends Document {
   userPhone: string;
   loanAmount: number;
   propertyValue: number;
-  status: 'new' | 'accepted' | 'rejected' | 'in_progress' | 'approved' | 'closed';
+  status: 'new' | 'accepted' | 'rejected' | 'in_progress' | 'approved' | 'closed' | 'disbursed';
   approvalProbability: 'high' | 'medium' | 'low';
   notes?: string;
   createdAt: Date;
@@ -27,7 +27,7 @@ const LeadSchema: Schema = new Schema({
   propertyValue: { type: Number, required: true },
   status: { 
     type: String, 
-    enum: ['new', 'accepted', 'rejected', 'in_progress', 'approved', 'closed'],
+    enum: ['new', 'accepted', 'rejected', 'in_progress', 'approved', 'closed', 'disbursed'],
     default: 'new'
   },
   approvalProbability: { type: String, enum: ['high', 'medium', 'low'], required: true },

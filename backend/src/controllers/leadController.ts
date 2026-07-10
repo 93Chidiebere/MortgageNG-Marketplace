@@ -1,10 +1,9 @@
 import { Request, Response } from 'express';
 import Lead from '../models/Lead';
+import Invoice from '../models/Invoice';
 
 export const getLenderLeads = async (req: Request | any, res: Response) => {
   try {
-    // Assuming the lender ID is somehow associated with the logged-in user.
-    // For now, we expect lenderId to be in the user token or query
     const lenderId = req.user.lenderId || req.query.lenderId; 
     
     if (!lenderId) {
@@ -23,14 +22,29 @@ export const getLenderLeads = async (req: Request | any, res: Response) => {
 export const updateLeadStatus = async (req: Request, res: Response) => {
   try {
     const { status } = req.body;
-    const lead = await Lead.findByIdAndUpdate(
-      req.params.id,
-      { status, updatedAt: Date.now() },
-      { new: true }
-    );
+    const lead = await Lead.findById(req.params.id);
+    
     if (!lead) {
       return res.status(404).json({ message: 'Lead not found' });
     }
+
+    const previousStatus = lead.status;
+    lead.status = status;
+    lead.updatedAt = new Date();
+    await lead.save();
+
+    // Business Logic: 500k flat fee per disbursement
+    if (status === 'disbursed' && previousStatus !== 'disbursed') {
+      const invoice = new Invoice({
+        lenderId: lead.lenderId,
+        leadId: lead._id,
+        amount: 500000,
+        description: `Disbursement fee for Lead ${lead._id}`
+      });
+      await invoice.save();
+      console.log(`Generated Invoice of 500,000 NGN for Lender ${lead.lenderId}`);
+    }
+
     res.json(lead);
   } catch (err) {
     console.error(err);

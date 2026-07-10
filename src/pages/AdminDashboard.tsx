@@ -22,6 +22,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { useNotifications } from '@/contexts/NotificationsContext';
+import { useRevenue } from '@/hooks/useApi';
 import { mockLenders, mockProducts, mockApplications, mockLeads, mockUsers } from '@/data/mockData';
 
 interface PendingLender {
@@ -147,6 +148,10 @@ export default function AdminDashboard() {
   const { switchRole } = useAuth();
   const navigate = useNavigate();
 
+  // Fetch real revenue
+  const { data: revenueData } = useRevenue();
+  const realPlatformRevenue = revenueData?.totalRevenue || 0;
+
   // Load pending lenders
   useEffect(() => {
     const saved = localStorage.getItem('pending_lenders');
@@ -262,7 +267,7 @@ export default function AdminDashboard() {
     totalLeads: mockLeads.length,
     totalUsers: mockUsers.filter(u => u.role === 'consumer').length,
     totalVolume: mockLeads.reduce((sum, l) => sum + l.loanAmount, 0),
-    platformRevenue: mockLeads.filter(l => l.status === 'closed').length * 150000,
+    platformRevenue: realPlatformRevenue,
     pendingApprovals: pendingCount,
   };
 
@@ -311,6 +316,12 @@ export default function AdminDashboard() {
               <h1 className="font-display text-2xl font-bold">Platform Administration</h1>
               <p className="text-muted-foreground text-sm">Manage lenders, monitor compliance, and oversee platform operations</p>
             </div>
+          </div>
+          <div className="mt-4 flex gap-2">
+            <Button onClick={() => navigate('/admin/onboard-bank')} className="gap-2">
+              <Building2 className="h-4 w-4" />
+              Onboard Bank
+            </Button>
           </div>
         </motion.div>
 

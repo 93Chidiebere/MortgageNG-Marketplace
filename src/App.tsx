@@ -13,6 +13,7 @@ import Calculator from "./pages/Calculator";
 import Dashboard from "./pages/Dashboard";
 import LenderDashboard from "./pages/LenderDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
+import OnboardBank from "./pages/OnboardBank";
 import Login from "./pages/Login";
 import Learn from "./pages/Learn";
 import ForLenders from "./pages/ForLenders";
@@ -47,6 +48,7 @@ const App = () => (
                 <Route path="/lender-onboarding" element={<LenderOnboarding />} />
                 <Route path="/admin" element={<AdminDashboard />} />
                 <Route path="/admin/dashboard" element={<AdminDashboard />} />
+                <Route path="/admin/onboard-bank" element={<OnboardBank />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/learn" element={<Learn />} />
                 <Route path="/for-lenders" element={<ForLenders />} />
