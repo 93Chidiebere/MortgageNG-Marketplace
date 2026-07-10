@@ -19,6 +19,10 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+app.get('/', (req, res) => {
+  res.json({ status: 'success', message: 'MortgageNG API is running perfectly! 🚀' });
+});
+
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/lenders', lenderRoutes);
