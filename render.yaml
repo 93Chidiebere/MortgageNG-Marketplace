@@ -11,4 +11,4 @@ services:
       - key: PORT
         value: 10000
       - key: MONGO_URI
-        value: mongodb+srv://mortgage_db:jmODRCsfVRFqPODl@mortgagecluster.vamezbl.mongodb.net/?appName=MortgageCluster
+        value: mongodb+srv://mortgage_db:jmODRCsfVRFqPOTl@mortgagecluster.vamezbl.mongodb.net/?appName=MortgageCluster
