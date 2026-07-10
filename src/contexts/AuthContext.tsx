@@ -5,7 +5,7 @@ import api from '@/lib/api';
 interface AuthContextType {
   user: User | null;
   isLoading: boolean;
-  login: (email: string, password: string) => Promise<boolean>;
+  login: (email: string, password: string) => Promise<{ success: boolean; role?: User['role'] }>;
   logout: () => void;
   register: (email: string, password: string, name: string, role: User['role']) => Promise<boolean>;
   switchRole: (role: User['role']) => void;
@@ -26,7 +26,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setIsLoading(false);
   }, []);
 
-  const login = async (email: string, password: string): Promise<boolean> => {
+  const login = async (email: string, password: string): Promise<{ success: boolean; role?: User['role'] }> => {
     setIsLoading(true);
     try {
       const { data } = await api.post('/auth/login', { email, password });
@@ -34,11 +34,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       localStorage.setItem('mortgage_user', JSON.stringify(data.user));
       localStorage.setItem('token', data.token);
       setIsLoading(false);
-      return true;
+      return { success: true, role: data.user.role };
     } catch (err) {
       console.error(err);
       setIsLoading(false);
-      return false;
+      return { success: false };
     }
   };
 
