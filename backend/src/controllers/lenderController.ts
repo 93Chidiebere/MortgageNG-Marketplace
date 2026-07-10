@@ -16,6 +16,11 @@ export const onboardLender = async (req: Request | any, res: Response) => {
       return res.status(400).json({ message: 'Lender with this email already exists' });
     }
 
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: 'A user account with this email already exists. Please use a different email for the bank manager.' });
+    }
+
     const lender = new Lender({
       name, shortName, type, email, phone, address, leadFee
     });
