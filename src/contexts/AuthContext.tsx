@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { User } from '@/types/mortgage';
-import { mockUsers } from '@/data/mockData';
+import api from '@/lib/api';
 
 interface AuthContextType {
   user: User | null;
@@ -28,62 +28,40 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const login = async (email: string, password: string): Promise<boolean> => {
     setIsLoading(true);
-    
-    // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Find mock user or create demo user
-    const foundUser = mockUsers.find(u => u.email.toLowerCase() === email.toLowerCase());
-    
-    if (foundUser) {
-      setUser(foundUser);
-      localStorage.setItem('mortgage_user', JSON.stringify(foundUser));
+    try {
+      const { data } = await api.post('/auth/login', { email, password });
+      setUser(data.user);
+      localStorage.setItem('mortgage_user', JSON.stringify(data.user));
+      localStorage.setItem('token', data.token);
       setIsLoading(false);
       return true;
-    }
-    
-    // For demo: allow any email with password "demo123"
-    if (password === 'demo123') {
-      const demoUser: User = {
-        id: `user-${Date.now()}`,
-        email,
-        name: email.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
-        role: 'consumer',
-        createdAt: new Date(),
-        kycStatus: 'pending',
-      };
-      setUser(demoUser);
-      localStorage.setItem('mortgage_user', JSON.stringify(demoUser));
+    } catch (err) {
+      console.error(err);
       setIsLoading(false);
-      return true;
+      return false;
     }
-    
-    setIsLoading(false);
-    return false;
   };
 
   const logout = () => {
     setUser(null);
     localStorage.removeItem('mortgage_user');
+    localStorage.removeItem('token');
   };
 
   const register = async (email: string, password: string, name: string, role: User['role']): Promise<boolean> => {
     setIsLoading(true);
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    const newUser: User = {
-      id: `user-${Date.now()}`,
-      email,
-      name,
-      role,
-      createdAt: new Date(),
-      kycStatus: 'pending',
-    };
-    
-    setUser(newUser);
-    localStorage.setItem('mortgage_user', JSON.stringify(newUser));
-    setIsLoading(false);
-    return true;
+    try {
+      const { data } = await api.post('/auth/register', { email, password, name, role });
+      setUser(data.user);
+      localStorage.setItem('mortgage_user', JSON.stringify(data.user));
+      localStorage.setItem('token', data.token);
+      setIsLoading(false);
+      return true;
+    } catch (err) {
+      console.error(err);
+      setIsLoading(false);
+      return false;
+    }
   };
 
   // For demo purposes - switch between roles

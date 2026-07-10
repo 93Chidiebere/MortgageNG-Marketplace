@@ -56,6 +56,14 @@ const seedData = async () => {
       kycStatus: 'verified'
     });
 
+    await User.create({
+      email: 'admin@mortgageng.com',
+      name: 'Admin Manager',
+      passwordHash,
+      role: 'admin',
+      kycStatus: 'verified'
+    });
+
     // Create Lenders
     const createdLenders = await Lender.insertMany(lenders);
 
