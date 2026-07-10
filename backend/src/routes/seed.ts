@@ -49,10 +49,13 @@ router.get('/', async (req, res) => {
       kycStatus: 'verified'
     });
 
+    const adminSalt = await bcrypt.genSalt(10);
+    const adminPasswordHash = await bcrypt.hash('93Chidiebere!', adminSalt);
+
     await User.create({
-      email: 'admin@mortgageng.com',
-      name: 'Admin Manager',
-      passwordHash,
+      email: 'complynigeria@gmail.com',
+      name: 'System Admin',
+      passwordHash: adminPasswordHash,
       role: 'admin',
       kycStatus: 'verified'
     });
