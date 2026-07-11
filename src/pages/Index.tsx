@@ -67,6 +67,23 @@ export default function Index() {
                   <span className="font-semibold text-foreground">Join</span> the growing community of smart homebuyers
                 </p>
               </div>
+
+              {/* Scrolling Ticker */}
+              <div className="mt-8 overflow-hidden relative w-full bg-card/60 backdrop-blur-md border border-border shadow-sm rounded-lg py-3 flex items-center">
+                <motion.div
+                  className="flex whitespace-nowrap gap-8 px-4 text-sm font-medium text-foreground/80"
+                  animate={{ x: ["0%", "-50%"] }}
+                  transition={{ repeat: Infinity, ease: "linear", duration: 20 }}
+                >
+                  <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary" /> MREIF: Unlock government real estate value</span>
+                  <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary" /> NHF: Access 6% mortgage rates</span>
+                  <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary" /> Real Estate: Your pathway to homeownership</span>
+                  {/* Duplicated for seamless loop */}
+                  <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary" /> MREIF: Unlock government real estate value</span>
+                  <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary" /> NHF: Access 6% mortgage rates</span>
+                  <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary" /> Real Estate: Your pathway to homeownership</span>
+                </motion.div>
+              </div>
             </motion.div>
             
             <motion.div
