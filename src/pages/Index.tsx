@@ -5,10 +5,10 @@ import { Button } from '@/components/ui/button';
 import { MainLayout } from '@/components/layout';
 
 const stats = [
-  { value: '₦500B+', label: 'Mortgages Facilitated' },
-  { value: '25+', label: 'Partner Lenders' },
-  { value: '15,000+', label: 'Happy Homeowners' },
-  { value: '48hrs', label: 'Avg. Pre-Approval' },
+  { value: '10+', label: 'Partner Lenders' },
+  { value: '₦10M+', label: 'Loan Options Available' },
+  { value: '100%', label: 'Free to Apply' },
+  { value: '24/7', label: 'Application Tracking' },
 ];
 
 const features = [
@@ -22,9 +22,12 @@ export default function Index() {
   return (
     <MainLayout>
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-hero">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,...')] opacity-5" />
-        <div className="container mx-auto px-4 py-20 lg:py-32">
+      <section className="relative overflow-hidden bg-gradient-hero min-h-[80vh] flex items-center">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/95 to-background/20 z-10" />
+          <img src="/hero-bg.png" alt="Luxury Home" className="w-full h-full object-cover" />
+        </div>
+        <div className="container relative z-20 mx-auto px-4 py-20 lg:py-32">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -40,7 +43,7 @@ export default function Index() {
                 <span className="text-primary">One Application</span> Away
               </h1>
               <p className="text-lg text-muted-foreground max-w-xl">
-                Compare mortgage products from 25+ Nigerian banks and PMBs. Apply once, get matched instantly, and track your journey to homeownership.
+                Compare mortgage products from top Nigerian banks and PMBs. Apply once, get matched instantly, and track your journey to homeownership.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-lg h-14 px-8">
@@ -61,7 +64,7 @@ export default function Index() {
                   ))}
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  <span className="font-semibold text-foreground">15,000+</span> Nigerians found their homes
+                  <span className="font-semibold text-foreground">Join</span> the growing community of smart homebuyers
                 </p>
               </div>
             </motion.div>
@@ -75,8 +78,8 @@ export default function Index() {
               <div className="relative bg-card rounded-2xl shadow-xl p-8 border">
                 <div className="space-y-6">
                   <div className="flex items-center justify-between">
-                    <h3 className="font-display font-semibold">Quick Estimate</h3>
-                    <span className="text-xs text-muted-foreground">2 min</span>
+                    <h3 className="font-display font-semibold">Example Estimate</h3>
+                    <span className="text-xs text-muted-foreground">Preview</span>
                   </div>
                   <div className="space-y-4">
                     <div className="p-4 bg-muted rounded-lg">

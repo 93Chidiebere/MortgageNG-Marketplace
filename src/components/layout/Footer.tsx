@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Home, Facebook, Twitter, Linkedin, Instagram, Mail, Phone, MapPin } from 'lucide-react';
+import { Home, Twitter, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -21,17 +21,11 @@ export function Footer() {
               Nigeria's premier mortgage marketplace. Compare, apply, and track your mortgage journey with transparency.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="text-muted-foreground hover:text-background transition-colors">
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-background transition-colors">
+              <a href="https://x.com/NigeriaMortgage" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-background transition-colors">
                 <Twitter className="h-5 w-5" />
               </a>
-              <a href="#" className="text-muted-foreground hover:text-background transition-colors">
+              <a href="https://www.linkedin.com/company/naija-mortgage/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-background transition-colors">
                 <Linkedin className="h-5 w-5" />
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-background transition-colors">
-                <Instagram className="h-5 w-5" />
               </a>
             </div>
           </div>

@@ -122,40 +122,7 @@ export function Navbar() {
                     </DropdownMenuItem>
                   )}
                   <DropdownMenuSeparator />
-                  {/* Demo role switcher */}
-                  <div className="px-2 py-1.5">
-                    <p className="text-xs text-muted-foreground mb-2">Demo: Switch Role</p>
-                    <div className="flex gap-1">
-                      <Button
-                        size="sm"
-                        variant={user.role === 'consumer' ? 'default' : 'outline'}
-                        className="text-xs h-7 flex-1"
-                        onClick={() => switchRole('consumer')}
-                      >
-                        <User className="h-3 w-3 mr-1" />
-                        User
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant={user.role === 'lender' ? 'default' : 'outline'}
-                        className="text-xs h-7 flex-1"
-                        onClick={() => switchRole('lender')}
-                      >
-                        <Building2 className="h-3 w-3 mr-1" />
-                        Lender
-                      </Button>
-                      <Button
-                        size="sm"
-                        variant={user.role === 'admin' ? 'default' : 'outline'}
-                        className="text-xs h-7 flex-1"
-                        onClick={() => switchRole('admin')}
-                      >
-                        <Shield className="h-3 w-3 mr-1" />
-                        Admin
-                      </Button>
-                    </div>
-                  </div>
-                  <DropdownMenuSeparator />
+
                   <DropdownMenuItem onClick={handleLogout} className="text-destructive">
                     <LogOut className="mr-2 h-4 w-4" />
                     Log out
