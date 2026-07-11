@@ -92,7 +92,9 @@ export function Footer() {
           {/* Contact */}
           <div className="space-y-4">
             <h3 className="font-display font-semibold text-background">Contact Us</h3>
-            <p className="text-sm text-muted-foreground italic">Coming Soon</p>
+            <a href="mailto:vchidiebere.vc@gmail.com" className="text-sm text-muted-foreground hover:text-background transition-colors flex items-center gap-2">
+              <Mail className="h-4 w-4" /> vchidiebere.vc@gmail.com
+            </a>
           </div>
         </div>
 
@@ -101,6 +103,9 @@ export function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground">
               © {new Date().getFullYear()} MortgageNG. All rights reserved.
+            </p>
+            <p className="text-sm font-medium text-muted-foreground md:absolute md:left-1/2 md:-translate-x-1/2">
+              From UNICCO
             </p>
             <div className="flex gap-6">
               <Link to="/privacy" className="text-sm text-muted-foreground hover:text-background transition-colors">

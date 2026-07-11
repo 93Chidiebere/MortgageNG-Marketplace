@@ -102,7 +102,7 @@ export const mockLenders: Lender[] = [
   },
   {
     id: 'lender-6',
-    name: 'Infinity Trust Mortgage Bank Plc',
+    name: 'Partner Bank F',
     shortName: 'Infinity Trust',
     type: 'pmb',
     email: 'info@infinitytrust.com',
@@ -116,7 +116,7 @@ export const mockLenders: Lender[] = [
   },
   {
     id: 'lender-7',
-    name: 'Abbey Mortgage Bank Plc',
+    name: 'Partner Bank G',
     shortName: 'Abbey Mortgage',
     type: 'pmb',
     email: 'info@abbeymortgage.com.ng',
@@ -130,7 +130,7 @@ export const mockLenders: Lender[] = [
   },
   {
     id: 'lender-8',
-    name: 'Jubilee-Life Mortgage Bank Plc',
+    name: 'Partner Bank H',
     shortName: 'Jubilee-Life',
     type: 'pmb',
     email: 'info@jubileelife.com',
@@ -143,7 +143,7 @@ export const mockLenders: Lender[] = [
   },
   {
     id: 'lender-9',
-    name: 'Refuge Mortgage Bank',
+    name: 'Partner Bank I',
     shortName: 'Refuge Mortgage',
     type: 'pmb',
     email: 'contact@refugemortgage.com',
@@ -156,7 +156,7 @@ export const mockLenders: Lender[] = [
   },
   {
     id: 'lender-10',
-    name: 'City Code Mortgage Bank Ltd',
+    name: 'Partner Bank J',
     shortName: 'City Code',
     type: 'pmb',
     email: 'info@citycodemortgage.com',
@@ -169,7 +169,7 @@ export const mockLenders: Lender[] = [
   },
   {
     id: 'lender-11',
-    name: 'FBN Mortgages Limited',
+    name: 'Partner Bank K',
     shortName: 'FBN Mortgages',
     type: 'commercial',
     email: 'mortgages@fbnbank.com',
@@ -183,7 +183,7 @@ export const mockLenders: Lender[] = [
   },
   {
     id: 'lender-12',
-    name: 'FHA Homes Ltd',
+    name: 'Partner Bank L',
     shortName: 'FHA Homes',
     type: 'pmb',
     email: 'info@fhahomes.com.ng',
@@ -197,7 +197,7 @@ export const mockLenders: Lender[] = [
   },
   {
     id: 'lender-13',
-    name: 'Homebase Mortgage Bank Limited',
+    name: 'Partner Bank M',
     shortName: 'Homebase',
     type: 'pmb',
     email: 'info@homebasemortgage.com',
@@ -366,7 +366,7 @@ export const mockProducts: MortgageProduct[] = [
   {
     id: 'prod-7',
     lenderId: 'lender-6',
-    lenderName: 'Infinity Trust Mortgage Bank Plc',
+    lenderName: 'Partner Bank F',
     name: 'Infinity Home Loan',
     interestRate: 17.0,
     rateType: 'fixed',
@@ -391,7 +391,7 @@ export const mockProducts: MortgageProduct[] = [
   {
     id: 'prod-8',
     lenderId: 'lender-7',
-    lenderName: 'Abbey Mortgage Bank Plc',
+    lenderName: 'Partner Bank G',
     name: 'Abbey Home Advantage',
     interestRate: 16.0,
     rateType: 'fixed',
@@ -416,7 +416,7 @@ export const mockProducts: MortgageProduct[] = [
   {
     id: 'prod-9',
     lenderId: 'lender-8',
-    lenderName: 'Jubilee-Life Mortgage Bank Plc',
+    lenderName: 'Partner Bank H',
     name: 'Jubilee First Home',
     interestRate: 18.0,
     rateType: 'fixed',
@@ -441,7 +441,7 @@ export const mockProducts: MortgageProduct[] = [
   {
     id: 'prod-10',
     lenderId: 'lender-9',
-    lenderName: 'Refuge Mortgage Bank',
+    lenderName: 'Partner Bank I',
     name: 'Refuge Shelter Plan',
     interestRate: 17.5,
     rateType: 'fixed',
@@ -466,7 +466,7 @@ export const mockProducts: MortgageProduct[] = [
   {
     id: 'prod-11',
     lenderId: 'lender-10',
-    lenderName: 'City Code Mortgage Bank Ltd',
+    lenderName: 'Partner Bank J',
     name: 'City Dweller Mortgage',
     interestRate: 18.5,
     rateType: 'fixed',
@@ -491,7 +491,7 @@ export const mockProducts: MortgageProduct[] = [
   {
     id: 'prod-12',
     lenderId: 'lender-11',
-    lenderName: 'FBN Mortgages Limited',
+    lenderName: 'Partner Bank K',
     name: 'FirstBank Home Ownership',
     interestRate: 15.5,
     rateType: 'fixed',
@@ -516,7 +516,7 @@ export const mockProducts: MortgageProduct[] = [
   {
     id: 'prod-13',
     lenderId: 'lender-12',
-    lenderName: 'FHA Homes Ltd',
+    lenderName: 'Partner Bank L',
     name: 'FHA Affordable Housing',
     interestRate: 16.5,
     rateType: 'fixed',
@@ -541,7 +541,7 @@ export const mockProducts: MortgageProduct[] = [
   {
     id: 'prod-14',
     lenderId: 'lender-13',
-    lenderName: 'Homebase Mortgage Bank Limited',
+    lenderName: 'Partner Bank M',
     name: 'Homebase Renovation Plus',
     interestRate: 19.0,
     rateType: 'fixed',
@@ -566,7 +566,7 @@ export const mockProducts: MortgageProduct[] = [
   {
     id: 'prod-15',
     lenderId: 'lender-13',
-    lenderName: 'Homebase Mortgage Bank Limited',
+    lenderName: 'Partner Bank M',
     name: 'Homebase Investment Property',
     interestRate: 20.0,
     rateType: 'variable',
