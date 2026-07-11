@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { 
   BookOpen, GraduationCap, Home, Calculator, FileText, 
-  HelpCircle, ChevronRight, Clock, User
+  HelpCircle, ChevronRight, Clock, User, Building2
 } from 'lucide-react';
 import { MainLayout } from '@/components/layout';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -13,43 +13,51 @@ import { Button } from '@/components/ui/button';
 const guides = [
   {
     id: 1,
-    title: 'First-Time Buyer Guide',
-    description: 'Everything you need to know about buying your first home in Nigeria',
-    icon: Home,
-    readTime: '12 min read',
+    title: 'NHF Scheme Explained',
+    description: 'How to leverage the National Housing Fund (NHF) for low-interest 6% mortgage rates.',
+    icon: GraduationCap,
+    readTime: '7 min read',
     level: 'Beginner',
   },
   {
     id: 2,
-    title: 'Understanding Mortgage Rates',
-    description: 'Learn about fixed vs variable rates and how they affect your payments',
-    icon: Calculator,
-    readTime: '8 min read',
-    level: 'Beginner',
+    title: 'Understanding FMBN',
+    description: 'The role of the Federal Mortgage Bank of Nigeria in providing affordable housing finance.',
+    icon: Building2,
+    readTime: '6 min read',
+    level: 'Intermediate',
   },
   {
     id: 3,
+    title: 'NMRC Refinancing',
+    description: 'How the Nigeria Mortgage Refinance Company provides liquidity to make mortgages cheaper.',
+    icon: Calculator,
+    readTime: '8 min read',
+    level: 'Advanced',
+  },
+  {
+    id: 4,
+    title: 'MOFI / MREIF Guide',
+    description: 'Understanding the Ministry of Finance Incorporated Real Estate Investment Fund.',
+    icon: BookOpen,
+    readTime: '5 min read',
+    level: 'Intermediate',
+  },
+  {
+    id: 5,
     title: 'Document Checklist',
-    description: 'Complete list of documents needed for your mortgage application',
+    description: 'Complete list of required documents: Offer letter, Title documents, Pay slips, and more.',
     icon: FileText,
     readTime: '5 min read',
     level: 'Beginner',
   },
   {
-    id: 4,
-    title: 'Islamic Mortgage Options',
-    description: 'Understanding Sharia-compliant home financing in Nigeria',
-    icon: BookOpen,
+    id: 6,
+    title: 'The Mortgage Process',
+    description: 'Step-by-step guide from pre-approval to final disbursement and property handover.',
+    icon: Home,
     readTime: '10 min read',
-    level: 'Intermediate',
-  },
-  {
-    id: 5,
-    title: 'NHF Scheme Explained',
-    description: 'How to leverage the National Housing Fund for lower rates',
-    icon: GraduationCap,
-    readTime: '7 min read',
-    level: 'Intermediate',
+    level: 'Beginner',
   },
 ];
 
@@ -89,12 +97,16 @@ const faqs = [
 ];
 
 const glossary = [
+  { term: 'NHF (National Housing Fund)', definition: 'A federal government scheme that mobilizes funds for the provision of affordable residential houses for Nigerians.' },
+  { term: 'FMBN (Federal Mortgage Bank of Nigeria)', definition: 'The apex mortgage institution in Nigeria responsible for managing the NHF and providing wholesale funding to Primary Mortgage Banks.' },
+  { term: 'NMRC (Nigeria Mortgage Refinance Company)', definition: 'A private sector-driven mortgage refinancing company promoting homeownership by raising long-term funds in the capital market.' },
+  { term: 'MOFI (Ministry of Finance Incorporated)', definition: 'The investment vehicle of the Federal Government of Nigeria, overseeing state-owned assets including MREIF.' },
+  { term: 'MREIF', definition: 'MOFI Real Estate Investment Fund, aimed at unlocking value in government real estate assets.' },
   { term: 'LTV (Loan-to-Value)', definition: 'The ratio of your loan amount to the property value, expressed as a percentage.' },
   { term: 'DTI (Debt-to-Income)', definition: 'The ratio of your total monthly debt payments to your gross monthly income.' },
   { term: 'Equity', definition: 'The portion of your property that you own outright (property value minus outstanding mortgage).' },
   { term: 'Amortization', definition: 'The process of paying off debt through regular payments that cover both principal and interest.' },
   { term: 'PMB', definition: 'Primary Mortgage Bank - specialized financial institutions licensed to provide mortgage financing in Nigeria.' },
-  { term: 'Murabaha', definition: 'An Islamic financing structure where the bank purchases the property and sells it to you at a markup, payable in installments.' },
 ];
 
 export default function Learn() {
