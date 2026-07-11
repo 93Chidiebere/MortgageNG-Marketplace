@@ -30,13 +30,7 @@ const documentRequirements: DocumentRequirement[] = [
     required: true,
     acceptedFormats: 'PDF, JPG, PNG',
   },
-  {
-    type: 'payslip',
-    label: 'Recent Payslips',
-    description: 'Last 3-6 months payslips from your employer',
-    required: true,
-    acceptedFormats: 'PDF',
-  },
+
   {
     type: 'bank_statement',
     label: 'Bank Statements',
@@ -44,13 +38,7 @@ const documentRequirements: DocumentRequirement[] = [
     required: true,
     acceptedFormats: 'PDF',
   },
-  {
-    type: 'offer_letter',
-    label: 'Employment Letter',
-    description: 'Confirmation of employment or offer letter',
-    required: true,
-    acceptedFormats: 'PDF',
-  },
+
   {
     type: 'property_doc',
     label: 'Property Documents',
