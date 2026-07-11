@@ -8,7 +8,6 @@ import { cn } from '@/lib/utils';
 import { PersonalInfoStep } from './steps/PersonalInfoStep';
 import { EmploymentStep } from './steps/EmploymentStep';
 import { PropertyStep } from './steps/PropertyStep';
-import { KYCStep } from './steps/KYCStep';
 import { DocumentsStep } from './steps/DocumentsStep';
 import { LenderSelectionStep } from './steps/LenderSelectionStep';
 import { ReviewStep } from './steps/ReviewStep';
@@ -40,12 +39,7 @@ interface ApplicationFormData {
   state: string;
   city: string;
   propertyAddress: string;
-  
-  // KYC
-  bvn: string;
-  nin: string;
-  bvnVerified: boolean;
-  ninVerified: boolean;
+  propertyFound: boolean;
   
   // Documents
   documents: Document[];
@@ -59,7 +53,6 @@ const STEPS = [
   { id: 'personal', title: 'Personal Info', icon: '👤' },
   { id: 'employment', title: 'Employment', icon: '💼' },
   { id: 'property', title: 'Property', icon: '🏠' },
-  { id: 'kyc', title: 'KYC Verification', icon: '🔐' },
   { id: 'documents', title: 'Documents', icon: '📄' },
   { id: 'lenders', title: 'Select Lenders', icon: '🏦' },
   { id: 'review', title: 'Review & Submit', icon: '✅' },
@@ -88,10 +81,7 @@ const initialFormData: ApplicationFormData = {
   state: '',
   city: '',
   propertyAddress: '',
-  bvn: '',
-  nin: '',
-  bvnVerified: false,
-  ninVerified: false,
+  propertyFound: false,
   documents: [],
   selectedLenders: [],
   mortgageType: 'conventional',
@@ -224,12 +214,10 @@ export function ApplicationWizard() {
       case 2:
         return <PropertyStep {...props} />;
       case 3:
-        return <KYCStep {...props} />;
-      case 4:
         return <DocumentsStep {...props} />;
-      case 5:
+      case 4:
         return <LenderSelectionStep {...props} />;
-      case 6:
+      case 5:
         return <ReviewStep {...props} onSubmit={handleSubmit} isSubmitting={isSubmitting} />;
       default:
         return null;

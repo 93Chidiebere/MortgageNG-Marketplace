@@ -9,19 +9,26 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from '@/components/ui/form';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
-import { cn } from '@/lib/utils';
+import { Switch } from '@/components/ui/switch';
 import { NIGERIAN_STATES } from '@/types/mortgage';
 import type { ApplicationFormData } from '../ApplicationWizard';
 
 const propertySchema = z.object({
+  propertyFound: z.boolean().default(false),
   propertyType: z.enum(['off_plan', 'completed', 'construction']),
   propertyValue: z.coerce.number().min(5000000, 'Minimum property value ₦5,000,000'),
   loanAmount: z.coerce.number().min(3000000, 'Minimum loan amount ₦3,000,000'),
   tenure: z.coerce.number().min(5, 'Minimum 5 years').max(30, 'Maximum 30 years'),
   state: z.string().min(1, 'Please select a state'),
   city: z.string().min(2, 'City is required'),
-  propertyAddress: z.string().min(10, 'Please provide a detailed address'),
+  propertyAddress: z.string().optional(),
 }).refine((data) => data.loanAmount <= data.propertyValue * 0.85, {
+  message: 'Loan amount cannot exceed 85% of property value/budget',
+  path: ['loanAmount'],
+}).refine((data) => !data.propertyFound || (data.propertyFound && data.propertyAddress && data.propertyAddress.length >= 10), {
+  message: 'Please provide a detailed address for the property',
+  path: ['propertyAddress'],
+});
   message: 'Loan amount cannot exceed 85% of property value',
   path: ['loanAmount'],
 });
@@ -60,16 +67,18 @@ export function PropertyStep({ formData, updateFormData, onNext, onPrev }: Prope
   const form = useForm<PropertyFormData>({
     resolver: zodResolver(propertySchema),
     defaultValues: {
+      propertyFound: formData.propertyFound || false,
       propertyType: formData.propertyType,
       propertyValue: formData.propertyValue || 25000000,
       loanAmount: formData.loanAmount || 20000000,
       tenure: formData.tenure || 15,
       state: formData.state,
       city: formData.city,
-      propertyAddress: formData.propertyAddress,
+      propertyAddress: formData.propertyAddress || '',
     },
   });
 
+  const propertyFound = form.watch('propertyFound');
   const propertyValue = form.watch('propertyValue');
   const loanAmount = form.watch('loanAmount');
   const tenure = form.watch('tenure');
@@ -108,6 +117,30 @@ export function PropertyStep({ formData, updateFormData, onNext, onPrev }: Prope
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            {/* Have you found a property toggle */}
+            <FormField
+              control={form.control}
+              name="propertyFound"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4 bg-primary/5">
+                  <div className="space-y-0.5">
+                    <FormLabel className="text-base">
+                      Have you found a property yet?
+                    </FormLabel>
+                    <FormDescription>
+                      Turn this on if you already have a specific property you want to buy.
+                    </FormDescription>
+                  </div>
+                  <FormControl>
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+
             {/* Property Type Selection */}
             <FormField
               control={form.control}
@@ -150,7 +183,7 @@ export function PropertyStep({ formData, updateFormData, onNext, onPrev }: Prope
                 name="propertyValue"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Property Value (₦)</FormLabel>
+                    <FormLabel>{propertyFound ? "Property Asking Price (₦)" : "Target Property Budget (₦)"}</FormLabel>
                     <FormControl>
                       <Input type="number" min={5000000} step={1000000} {...field} />
                     </FormControl>
@@ -271,23 +304,25 @@ export function PropertyStep({ formData, updateFormData, onNext, onPrev }: Prope
               />
             </div>
 
-            <FormField
-              control={form.control}
-              name="propertyAddress"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Property Address</FormLabel>
-                  <FormControl>
-                    <Textarea 
-                      placeholder="Enter the full property address or development name"
-                      className="resize-none"
-                      {...field} 
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            {propertyFound && (
+              <FormField
+                control={form.control}
+                name="propertyAddress"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Property Address</FormLabel>
+                    <FormControl>
+                      <Textarea 
+                        placeholder="Enter the full property address or development name"
+                        className="resize-none"
+                        {...field} 
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
 
             <div className="flex justify-between pt-4">
               <Button type="button" variant="outline" onClick={onPrev} className="gap-2">

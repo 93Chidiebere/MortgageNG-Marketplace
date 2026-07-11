@@ -61,21 +61,14 @@ export function ReviewStep({ formData, onPrev, onSubmit, isSubmitting }: ReviewS
       icon: Home,
       title: 'Property & Loan Details',
       items: [
+        { label: 'Property Found?', value: formData.propertyFound ? 'Yes' : 'No' },
         { label: 'Property Type', value: formData.propertyType.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase()) },
-        { label: 'Property Value', value: formatCurrency(formData.propertyValue) },
+        { label: formData.propertyFound ? 'Asking Price' : 'Target Budget', value: formatCurrency(formData.propertyValue) },
         { label: 'Loan Amount', value: formatCurrency(formData.loanAmount) },
         { label: 'Loan Tenure', value: `${formData.tenure} years` },
         { label: 'LTV Ratio', value: `${((formData.loanAmount / formData.propertyValue) * 100).toFixed(1)}%` },
         { label: 'Location', value: `${formData.city}, ${formData.state}` },
-        { label: 'Property Address', value: formData.propertyAddress },
-      ],
-    },
-    {
-      icon: Shield,
-      title: 'KYC Verification',
-      items: [
-        { label: 'BVN', value: formData.bvn ? `****${formData.bvn.slice(-4)}` : 'Not provided', verified: formData.bvnVerified },
-        { label: 'NIN', value: formData.nin ? `****${formData.nin.slice(-4)}` : 'Not provided', verified: formData.ninVerified },
+        ...(formData.propertyFound ? [{ label: 'Property Address', value: formData.propertyAddress }] : []),
       ],
     },
     {
