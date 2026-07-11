@@ -29,10 +29,6 @@ const propertySchema = z.object({
   message: 'Please provide a detailed address for the property',
   path: ['propertyAddress'],
 });
-  message: 'Loan amount cannot exceed 85% of property value',
-  path: ['loanAmount'],
-});
-
 type PropertyFormData = z.infer<typeof propertySchema>;
 
 interface PropertyStepProps {
