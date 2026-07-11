@@ -49,11 +49,14 @@ router.get('/', async (req, res) => {
       kycStatus: 'verified'
     });
 
+    const adminEmail = process.env.ADMIN_EMAIL || 'complynigeria@gmail.com';
+    const adminPassword = process.env.ADMIN_PASSWORD || 'ChangeMeImmediately123!';
+
     const adminSalt = await bcrypt.genSalt(10);
-    const adminPasswordHash = await bcrypt.hash('93Chidiebere!', adminSalt);
+    const adminPasswordHash = await bcrypt.hash(adminPassword, adminSalt);
 
     await User.create({
-      email: 'complynigeria@gmail.com',
+      email: adminEmail,
       name: 'System Admin',
       passwordHash: adminPasswordHash,
       role: 'admin',
