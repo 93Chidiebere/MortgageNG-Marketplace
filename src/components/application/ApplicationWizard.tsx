@@ -5,6 +5,9 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
+import api from '@/lib/api';
 import { PersonalInfoStep } from './steps/PersonalInfoStep';
 import { EmploymentStep } from './steps/EmploymentStep';
 import { PropertyStep } from './steps/PropertyStep';
@@ -93,6 +96,8 @@ export function ApplicationWizard() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
   const { toast } = useToast();
+  const navigate = useNavigate();
+  const { user } = useAuth();
 
   // Load saved draft on mount
   useEffect(() => {
@@ -156,49 +161,59 @@ export function ApplicationWizard() {
   };
 
   const handleSubmit = async () => {
+    // Ensure user is logged in before submitting
+    if (!user) {
+      toast({
+        title: 'Authentication Required',
+        description: 'Please log in or create an account to submit your application. Your progress is saved!',
+        variant: 'destructive',
+      });
+      // Save draft just in case
+      saveDraft();
+      navigate('/login');
+      return;
+    }
+
     setIsSubmitting(true);
     
-    // Simulate submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    // Create application in localStorage
-    const application: MortgageApplication = {
-      id: `app-${Date.now()}`,
-      userId: 'user-1',
-      status: 'submitted',
-      employmentType: formData.employmentType,
-      propertyType: formData.propertyType,
-      propertyValue: formData.propertyValue,
-      loanAmount: formData.loanAmount,
-      tenure: formData.tenure,
-      monthlyIncome: formData.monthlyIncome,
-      existingObligations: formData.existingObligations,
-      state: formData.state,
-      city: formData.city,
-      propertyAddress: formData.propertyAddress,
-      documents: formData.documents,
-      selectedLenders: formData.selectedLenders,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
+    try {
+      const applicationPayload = {
+        employmentType: formData.employmentType,
+        propertyType: formData.propertyType,
+        propertyValue: formData.propertyValue,
+        loanAmount: formData.loanAmount,
+        tenure: formData.tenure,
+        monthlyIncome: formData.monthlyIncome,
+        existingObligations: formData.existingObligations,
+        state: formData.state,
+        city: formData.city,
+        propertyAddress: formData.propertyAddress,
+        selectedLenders: formData.selectedLenders,
+      };
 
-    // Save to localStorage
-    const existingApps = JSON.parse(localStorage.getItem('applications') || '[]');
-    existingApps.push(application);
-    localStorage.setItem('applications', JSON.stringify(existingApps));
-    
-    // Clear draft
-    localStorage.removeItem(STORAGE_KEY);
-    
-    setIsSubmitting(false);
-    
-    toast({
-      title: 'Application Submitted!',
-      description: 'Your mortgage application has been sent to the selected lenders.',
-    });
-    
-    // Redirect to dashboard or confirmation
-    window.location.href = '/dashboard';
+      // Send to Railway Backend
+      await api.post('/applications', applicationPayload);
+      
+      // Clear draft upon successful submission
+      localStorage.removeItem(STORAGE_KEY);
+      
+      toast({
+        title: 'Application Submitted!',
+        description: 'Your mortgage application has been securely sent to the selected lenders.',
+      });
+      
+      // Redirect to dashboard
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('Submission failed:', error);
+      toast({
+        title: 'Submission Failed',
+        description: 'There was an error submitting your application. Please try again.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const progress = ((currentStep + 1) / STEPS.length) * 100;
