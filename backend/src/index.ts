@@ -31,7 +31,7 @@ app.use('/api/leads', leadRoutes);
 app.use('/api/revenue', revenueRoutes);
 app.use('/api/seed', seedRoutes);
 
-const PORT = process.env.PORT || 5000;
+const PORT = Number(process.env.PORT) || 5000;
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/mortgage-ng';
 
 // Connect to MongoDB
