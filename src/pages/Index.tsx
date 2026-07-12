@@ -47,25 +47,25 @@ export default function Index() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 w-full">
                 <Link to="/apply" className="w-full sm:w-auto">
-                  <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground text-lg h-14 px-8">
-                    Start Your Application <ArrowRight className="ml-2 h-5 w-5" />
+                  <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground text-base sm:text-lg h-auto py-3 px-4 sm:px-8 whitespace-normal text-center leading-tight">
+                    Start Your Application <ArrowRight className="ml-2 h-5 w-5 shrink-0 inline-block" />
                   </Button>
                 </Link>
                 <Link to="/calculator" className="w-full sm:w-auto">
-                  <Button variant="outline" size="lg" className="w-full text-foreground border-border hover:bg-muted text-lg h-14 px-8">
+                  <Button variant="outline" size="lg" className="w-full text-foreground border-border hover:bg-muted text-base sm:text-lg h-auto py-3 px-4 sm:px-8 whitespace-normal text-center leading-tight">
                     Check Affordability
                   </Button>
                 </Link>
               </div>
-              <div className="flex items-center gap-4 pt-4">
-                <div className="flex -space-x-2">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-4 pt-4">
+                <div className="flex -space-x-2 shrink-0">
                   {[1, 2, 3, 4].map((i) => (
                     <div key={i} className="w-10 h-10 rounded-full bg-muted border-2 border-background flex items-center justify-center text-xs font-medium">
                       {String.fromCharCode(64 + i)}
                     </div>
                   ))}
                 </div>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-muted-foreground break-words whitespace-normal w-full">
                   <span className="font-semibold text-foreground">Join</span> the growing community of smart homebuyers
                 </p>
               </div>
