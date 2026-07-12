@@ -38,22 +38,24 @@ export default function Index() {
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary/20 text-secondary-foreground border border-secondary/30">
                 <span className="text-sm font-medium">🇳🇬 Nigeria's #1 Mortgage Marketplace</span>
               </div>
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-                Your Dream Home,{' '}
+              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight break-words">
+                Your Dream Home, <br />
                 <span className="text-primary">One Application</span> Away
               </h1>
               <p className="text-lg text-muted-foreground max-w-xl">
                 Compare mortgage products from top Nigerian banks and PMBs. Apply once, get matched instantly, and track your journey to homeownership.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-lg h-14 px-8">
-                  <Link to="/apply">
+              <div className="flex flex-col sm:flex-row gap-4 w-full">
+                <Link to="/apply" className="w-full sm:w-auto">
+                  <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground text-lg h-14 px-8">
                     Start Your Application <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="lg" className="text-lg h-14 px-8">
-                  <Link to="/calculator">Check Affordability</Link>
-                </Button>
+                  </Button>
+                </Link>
+                <Link to="/calculator" className="w-full sm:w-auto">
+                  <Button variant="outline" size="lg" className="w-full text-foreground border-border hover:bg-muted text-lg h-14 px-8">
+                    Check Affordability
+                  </Button>
+                </Link>
               </div>
               <div className="flex items-center gap-4 pt-4">
                 <div className="flex -space-x-2">
