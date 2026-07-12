@@ -87,37 +87,6 @@ export default function Index() {
                 </motion.div>
               </div>
             </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative hidden lg:block"
-            >
-              <div className="relative bg-card rounded-2xl shadow-xl p-8 border">
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-display font-semibold">Example Estimate</h3>
-                    <span className="text-xs text-muted-foreground">Preview</span>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="p-4 bg-muted rounded-lg">
-                      <p className="text-sm text-muted-foreground">Property Value</p>
-                      <p className="text-2xl font-bold">₦35,000,000</p>
-                    </div>
-                    <div className="p-4 bg-primary/10 rounded-lg border border-primary/20">
-                      <p className="text-sm text-muted-foreground">You could borrow up to</p>
-                      <p className="text-3xl font-bold text-primary">₦28,000,000</p>
-                      <p className="text-sm text-muted-foreground mt-1">From ₦186,000/month</p>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-success">
-                      <CheckCircle2 className="h-4 w-4" />
-                      <span>12 lenders match your profile</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
           </div>
         </div>
       </section>
