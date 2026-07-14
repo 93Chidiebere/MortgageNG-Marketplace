@@ -105,7 +105,7 @@ export function Footer() {
               © {new Date().getFullYear()} MortgageNG. All rights reserved.
             </p>
             <p className="text-sm font-medium text-muted-foreground md:absolute md:left-1/2 md:-translate-x-1/2">
-              From UNICCO
+              By UNICCO
             </p>
             <div className="flex gap-6">
               <Link to="/privacy" className="text-sm text-muted-foreground hover:text-background transition-colors">
