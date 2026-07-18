@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
-import { Eye, EyeOff, Mail, Lock, ArrowRight, Building2, User, Shield, KeyRound } from 'lucide-react';
+import { Eye, EyeOff, Mail, Lock, ArrowRight, Building2, User, Shield, KeyRound, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -249,6 +249,19 @@ export default function Login() {
           <Link to="/terms" className="underline hover:text-foreground">Terms</Link> and{' '}
           <Link to="/privacy" className="underline hover:text-foreground">Privacy Policy</Link>
         </p>
+
+        {/* Contact Enquiries */}
+        <div className="mt-8 text-center text-sm text-muted-foreground bg-card/50 border border-border p-4 rounded-xl max-w-md mx-auto">
+          <p className="mb-2 font-medium text-foreground">Need help or have enquiries?</p>
+          <div className="flex flex-col gap-2">
+            <a href="mailto:vchidiebere.vc@gmail.com" className="flex items-center justify-center gap-2 hover:text-primary transition-colors">
+              <Mail className="h-4 w-4" /> vchidiebere.vc@gmail.com
+            </a>
+            <a href="https://wa.me/2347068488419" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 hover:text-primary transition-colors">
+              <MessageCircle className="h-4 w-4" /> WhatsApp: 07068488419
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );

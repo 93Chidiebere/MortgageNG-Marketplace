@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Shield, Clock, Building2, Calculator, FileCheck, TrendingUp, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Shield, Clock, Building2, Calculator, FileCheck, TrendingUp, CheckCircle2, Mail, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { MainLayout } from '@/components/layout';
 
@@ -85,6 +85,20 @@ export default function Index() {
                   <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary" /> NHF: Access 6% mortgage rates</span>
                   <span className="flex items-center gap-2"><span className="w-1.5 h-1.5 rounded-full bg-primary" /> Real Estate: Your pathway to homeownership</span>
                 </motion.div>
+              </div>
+
+              {/* Contact Info */}
+              <div className="mt-6 flex flex-col sm:flex-row items-start sm:items-center gap-4 text-sm text-muted-foreground bg-background/50 p-4 rounded-lg border border-border backdrop-blur-sm">
+                <span className="font-semibold text-foreground">For Enquiries:</span>
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                  <a href="mailto:vchidiebere.vc@gmail.com" className="hover:text-primary transition-colors flex items-center gap-2">
+                    <Mail className="h-4 w-4" /> vchidiebere.vc@gmail.com
+                  </a>
+                  <div className="hidden sm:block w-px h-4 bg-border"></div>
+                  <a href="https://wa.me/2347068488419" target="_blank" rel="noreferrer" className="hover:text-primary transition-colors flex items-center gap-2">
+                    <MessageCircle className="h-4 w-4" /> WhatsApp: 07068488419
+                  </a>
+                </div>
               </div>
             </motion.div>
           </div>
